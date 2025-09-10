@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import { Link, matchPath, useLocation } from 'react-router-dom';
 
 export const Navbar = () => {
-  const { pathname } = useLocation();
+  const { pathname, search } = useLocation();
 
   const isTabActive =
     matchPath({ path: '/people/:slug', end: true }, pathname) ||
@@ -30,7 +30,7 @@ export const Navbar = () => {
             className={classNames('navbar-item', {
               'has-background-grey-lighter': isTabActive,
             })}
-            to="/people"
+            to={`/people${search}`}
           >
             People
           </Link>

@@ -25,8 +25,8 @@ export const PeoplePage = () => {
       filtered = filtered.filter(
         person =>
           person.name.toLowerCase().includes(search) ||
-          person.motherName?.toLowerCase().includes(search) ||
-          person.fatherName?.toLowerCase().includes(search),
+          (person.motherName ?? '').toLowerCase().includes(search) ||
+          (person.fatherName ?? '').toLowerCase().includes(search),
       );
     }
 
@@ -62,7 +62,9 @@ export const PeoplePage = () => {
       <div className="block">
         <div className="columns is-desktop is-flex-direction-row-reverse">
           <div className="column is-7-tablet is-narrow-desktop">
-            <PeopleFilters />
+            {!errorMessage && !isLoading && people.length > 0 && (
+              <PeopleFilters />
+            )}
           </div>
 
           <div className="column">
